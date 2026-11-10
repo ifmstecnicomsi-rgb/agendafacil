@@ -99,6 +99,6 @@ Resultado atual (versão 1.1): **54 testes aprovados**. Detalhes em [`docs/situa
 
 ## Links
 
-- **Sistema em funcionamento:** https://SEU-USUARIO.pythonanywhere.com
+- **Sistema em funcionamento:** https://ifmstecnicomsi.pythonanywhere.com
 - **Vídeo de apresentação:** _inserir link_
 - **Vídeo das correções:** _inserir link_
