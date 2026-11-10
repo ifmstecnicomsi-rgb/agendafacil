@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if cliente.id else 'Novo' }} cliente{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-form">
+  <h1>{{ 'Editar' if cliente.id else 'Novo' }} cliente</h1>
+  <form method="post" novalidate data-validar>
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>Nome *
+      <input type="text" name="nome" required minlength="2" maxlength="100" value="{{ dados.nome or cliente.nome or '' }}">
+    </label>
+    <label>Telefone (com DDD) *
+      <input type="tel" name="telefone" required data-mascara="telefone" placeholder="(61) 99999-9999"
+             value="{{ dados.telefone or (cliente.telefone_formatado if cliente.telefone else '') }}">
+    </label>
+    <label>E-mail
+      <input type="email" name="email" maxlength="120" value="{{ dados.email or cliente.email or '' }}">
+    </label>
+    <div class="botoes">
+      <a class="btn" href="{{ url_for('clientes.listar') }}">Cancelar</a>
+      <button class="btn btn-primario" type="submit">Salvar</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

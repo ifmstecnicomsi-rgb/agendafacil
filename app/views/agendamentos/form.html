@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if ag.id else 'Novo' }} agendamento{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-form">
+  <h1>{{ 'Editar' if ag.id else 'Novo' }} agendamento</h1>
+  {% if not clientes or not servicos %}
+    <p class="vazio">Para agendar, cadastre antes pelo menos
+      {% if not clientes %}<a href="{{ url_for('clientes.formulario') }}">um cliente</a>{% endif %}
+      {% if not clientes and not servicos %} e {% endif %}
+      {% if not servicos %}<a href="{{ url_for('servicos.formulario') }}">um serviço ativo</a>{% endif %}.</p>
+  {% else %}
+  {% set cli_sel = (dados.cliente_id|int) if dados.cliente_id else ag.cliente_id %}
+  {% set srv_sel = (dados.servico_id|int) if dados.servico_id else ag.servico_id %}
+  <form method="post" novalidate data-validar>
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>Cliente *
+      <select name="cliente_id" required>
+        <option value="">Selecione…</option>
+        {% for c in clientes %}<option value="{{ c.id }}" {{ 'selected' if c.id == cli_sel }}>{{ c.nome }} · {{ c.telefone_formatado }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Serviço *
+      <select name="servico_id" required>
+        <option value="">Selecione…</option>
+        {% for s in servicos %}<option value="{{ s.id }}" {{ 'selected' if s.id == srv_sel }}>{{ s.nome }} · {{ s.duracao_min }} min · {{ s.preco_formatado }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Data e hora *
+      <input type="datetime-local" name="inicio" required step="900"
+             value="{{ dados.inicio or (ag.inicio.strftime('%Y-%m-%dT%H:%M') if ag.inicio else '') }}">
+    </label>
+    <p class="dica">Funcionamento: segunda a sábado, das 08h às 20h.</p>
+    <label>Observação
+      <textarea name="observacao" maxlength="255" rows="3">{{ dados.observacao or ag.observacao or '' }}</textarea>
+    </label>
+    <div class="botoes">
+      <a class="btn" href="{{ url_for('agendamentos.listar') }}">Voltar</a>
+      <button class="btn btn-primario" type="submit">Salvar</button>
+    </div>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

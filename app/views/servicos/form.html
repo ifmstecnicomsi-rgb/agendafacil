@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if servico.id else 'Novo' }} serviço{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-form">
+  <h1>{{ 'Editar' if servico.id else 'Novo' }} serviço</h1>
+  <form method="post" novalidate data-validar>
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>Nome *
+      <input type="text" name="nome" required minlength="2" maxlength="80" value="{{ dados.nome or servico.nome or '' }}">
+    </label>
+    <label>Duração (minutos) *
+      <input type="number" name="duracao_min" required min="5" max="480" step="5" value="{{ dados.duracao_min or servico.duracao_min or '' }}">
+    </label>
+    <label>Preço (R$) *
+      <input type="number" name="preco" required min="0" max="999999.99" step="0.01" value="{{ dados.preco or (servico.preco if servico.preco is not none else '') }}">
+    </label>
+    <label class="check"><input type="checkbox" name="ativo" {{ 'checked' if (dados.ativo if dados else servico.ativo) }}> Serviço ativo</label>
+    <div class="botoes">
+      <a class="btn" href="{{ url_for('servicos.listar') }}">Cancelar</a>
+      <button class="btn btn-primario" type="submit">Salvar</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

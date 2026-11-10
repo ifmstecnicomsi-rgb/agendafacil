@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titulo %}Painel{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Painel</h1>
+  <a class="btn btn-primario" href="{{ url_for('agendamentos.formulario') }}">+ Novo agendamento</a>
+</div>
+
+<div class="indicadores">
+  <div class="indicador"><span>{{ hoje|length }}</span>Agendamentos hoje</div>
+  <div class="indicador"><span>{{ total_clientes }}</span>Clientes</div>
+  <div class="indicador"><span>{{ total_servicos }}</span>Serviços ativos</div>
+  <div class="indicador"><span>{{ faturamento }}</span>Faturado hoje</div>
+</div>
+
+<section class="cartao">
+  <h2>Próximos atendimentos</h2>
+  {% if proximos %}
+  <table>
+    <thead><tr><th>Data</th><th>Hora</th><th>Cliente</th><th>Serviço</th></tr></thead>
+    <tbody>
+    {% for a in proximos %}
+      <tr><td data-rotulo="Data">{{ a.inicio.strftime('%d/%m/%Y') }}</td><td data-rotulo="Hora">{{ a.inicio.strftime('%H:%M') }}</td>
+          <td data-rotulo="Cliente">{{ a.cliente.nome }}</td><td data-rotulo="Serviço">{{ a.servico.nome }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="vazio">Nenhum atendimento futuro. <a href="{{ url_for('agendamentos.formulario') }}">Agende agora</a>.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}Serviços{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Serviços</h1>
+  <a class="btn btn-primario" href="{{ url_for('servicos.formulario') }}">+ Novo serviço</a>
+</div>
+<section class="cartao">
+  {% if servicos %}
+  <table>
+    <thead><tr><th>Serviço</th><th>Duração</th><th>Preço</th><th>Situação</th><th></th></tr></thead>
+    <tbody>
+    {% for s in servicos %}
+      <tr class="{{ 'inativo' if not s.ativo }}">
+        <td data-rotulo="Serviço">{{ s.nome }}</td>
+        <td data-rotulo="Duração">{{ s.duracao_min }} min</td>
+        <td data-rotulo="Preço">{{ s.preco_formatado }}</td>
+        <td data-rotulo="Situação"><span class="selo selo-{{ 'concluido' if s.ativo else 'cancelado' }}">{{ 'Ativo' if s.ativo else 'Inativo' }}</span></td>
+        <td><div class="acoes">
+          <a class="btn btn-pequeno" href="{{ url_for('servicos.formulario', id=s.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('servicos.excluir', id=s.id) }}" data-confirmar="Excluir o serviço {{ s.nome }}?">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <button class="btn btn-pequeno btn-perigo" type="submit">Excluir</button>
+          </form>
+        </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="vazio">Nenhum serviço cadastrado. Cadastre o primeiro para começar a agendar.</p>
+  {% endif %}
+</section>
+{% endblock %}

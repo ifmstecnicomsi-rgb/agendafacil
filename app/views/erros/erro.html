@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block titulo %}Erro {{ codigo }}{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-login centro">
+  <h1>Erro {{ codigo }}</h1>
+  <p>{{ mensagem }}</p>
+  <a class="btn btn-primario" href="{{ url_for('painel.inicio') }}">Voltar ao início</a>
+</section>
+{% endblock %}

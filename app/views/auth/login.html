@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-login">
+  <h1>✂ AgendaFácil</h1>
+  <p class="sub">Agendamento para salões de beleza</p>
+  <form method="post" novalidate data-validar>
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>E-mail
+      <input type="email" name="email" required autofocus value="{{ request.form.email }}">
+    </label>
+    <label>Senha
+      <input type="password" name="senha" required minlength="6">
+    </label>
+    <button class="btn btn-primario" type="submit">Entrar</button>
+  </form>
+  <p class="centro sub" style="margin-top:1rem;font-size:.9rem">Novos usuários são cadastrados por quem já tem acesso ao sistema.</p>
+</section>
+{% endblock %}

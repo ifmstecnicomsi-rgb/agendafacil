@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}Cadastro{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-login">
+  <h1>Novo usuário</h1>
+  <p class="sub">Cadastre alguém da equipe para acessar o sistema.</p>
+  <form method="post" novalidate data-validar>
+    <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+    <label>Nome completo
+      <input type="text" name="nome" required minlength="2" value="{{ request.form.nome }}">
+    </label>
+    <label>E-mail
+      <input type="email" name="email" required value="{{ request.form.email }}">
+    </label>
+    <label>Senha (mínimo 6 caracteres)
+      <input type="password" name="senha" required minlength="6">
+    </label>
+    <label>Confirmar senha
+      <input type="password" name="confirmar" required minlength="6">
+    </label>
+    <button class="btn btn-primario" type="submit">Cadastrar</button>
+  </form>
+  <p class="centro"><a href="{{ url_for('painel.inicio') }}">Voltar ao painel</a></p>
+</section>
+{% endblock %}

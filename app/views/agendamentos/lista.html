@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block titulo %}Agenda{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Agenda de {{ dia.strftime('%d/%m/%Y') }}</h1>
+  <a class="btn btn-primario" href="{{ url_for('agendamentos.formulario') }}">+ Novo agendamento</a>
+</div>
+<form class="busca" method="get">
+  <input type="date" name="data" value="{{ dia.isoformat() }}" onchange="this.form.submit()">
+  <button class="btn" type="submit">Ver dia</button>
+</form>
+<section class="cartao">
+  {% if agendamentos %}
+  <table>
+    <thead><tr><th>Horário</th><th>Cliente</th><th>Serviço</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+    {% for a in agendamentos %}
+      <tr>
+        <td data-rotulo="Horário">{{ a.inicio.strftime('%H:%M') }}–{{ a.fim.strftime('%H:%M') }}</td>
+        <td data-rotulo="Cliente">{{ a.cliente.nome }}<br><small>{{ a.cliente.telefone_formatado }}</small></td>
+        <td data-rotulo="Serviço">{{ a.servico.nome }}{% if a.observacao %}<br><small>{{ a.observacao }}</small>{% endif %}</td>
+        <td data-rotulo="Status"><span class="selo selo-{{ a.status }}">{{ {'agendado':'Agendado','concluido':'Concluído','cancelado':'Cancelado'}[a.status] }}</span></td>
+        <td><div class="acoes">
+          {% if a.status == 'agendado' %}
+          <a class="btn btn-pequeno" href="{{ url_for('agendamentos.formulario', id=a.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('agendamentos.status', id=a.id, novo='concluido') }}">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <button class="btn btn-pequeno btn-sucesso" type="submit">Concluir</button>
+          </form>
+          <form method="post" action="{{ url_for('agendamentos.status', id=a.id, novo='cancelado') }}" data-confirmar="Cancelar este agendamento?">
+            <input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+            <button class="btn btn-pequeno btn-perigo" type="submit">Cancelar</button>
+          </form>
+          {% endif %}
+        </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="vazio">Nenhum agendamento neste dia.</p>
+  {% endif %}
+</section>
+{% endblock %}
