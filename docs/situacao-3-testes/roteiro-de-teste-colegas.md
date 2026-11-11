@@ -2,7 +2,7 @@
 
 Olá! Obrigado(a) por testar o **AgendaFácil**, um sistema de agendamento para salões de beleza.
 
-- **Endereço:** https://SEU-USUARIO.pythonanywhere.com
+- **Endereço:** https://www.ifmstecnicomsi.pythonanywhere.com
 - **Tempo estimado:** 10 a 15 minutos
 - Teste pelo **computador e pelo celular**, se puder.
 - Quando algo der errado ou ficar estranho, **tire um print da tela**.
