@@ -7,8 +7,8 @@
 | Sistema | AgendaFácil – agendamento para salões de beleza |
 | Versão testada | 1.0 |
 | Versão corrigida | 1.1 |
-| Endereço | https://SEU-USUARIO.pythonanywhere.com |
-| Responsável | _Nome do(a) estudante_ |
+| Endereço | https://www.ifmstecnicomsi.pythonanywhere.com |
+| Responsável | _Arlan_ |
 
 ## 2. Verificação interna – testes automatizados
 
