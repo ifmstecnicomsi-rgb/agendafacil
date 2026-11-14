@@ -10,7 +10,7 @@
 ## Vídeo 1 – Apresentação da solução (mínimo 5 minutos)
 
 ### 0:00 – Abertura (≈ 30 s) · *tela: página inicial do GitHub*
-> "Olá, meu nome é ___, RGM ___. Este é o AgendaFácil, projeto do Projeto Integrador Transdisciplinar em Engenharia de Software II. É um sistema web de agendamento para salões de beleza."
+> "Olá, meu nome é Arlan, RGM 40653382. Este é o AgendaFácil, projeto do Projeto Integrador Transdisciplinar em Engenharia de Software II. É um sistema web de agendamento para salões de beleza."
 
 ### 0:30 – Problema e objetivo (≈ 40 s) · *tela: README*
 > "Muitos salões ainda controlam horários em caderno ou pelo WhatsApp, o que causa horário marcado em duplicidade e falta de controle. O AgendaFácil organiza clientes, serviços e a agenda, e impede que dois atendimentos sejam marcados no mesmo horário. O código e a documentação foram desenvolvidos com apoio da ferramenta de IA Claude."
@@ -47,7 +47,7 @@ Rode `python -m pytest -v`.
 > Preencha os colchetes com os problemas reais apontados pelos colegas, na mesma ordem do Laudo de Qualidade.
 
 ### 0:00 – Abertura (≈ 20 s)
-> "Olá, sou ___, RGM ___. Neste vídeo mostro as correções feitas no AgendaFácil depois dos testes com cinco colegas."
+> "Olá, sou Arlan, RGM 40653382. Neste vídeo mostro as correções feitas no AgendaFácil depois dos testes com cinco colegas."
 
 ### 0:20 – Testes exploratórios (≈ 1 min) · *tela: laudo de qualidade no GitHub*
 > "Antes de enviar para os colegas, fiz uma rodada de testes tentando quebrar o sistema e encontrei 8 erros. Os dois mais graves: qualquer pessoa conseguia criar uma conta e ver os clientes do salão, e o servidor de hospedagem, que fica em outro fuso horário, recusava horários de hoje como se já tivessem passado."
